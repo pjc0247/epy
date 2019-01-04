@@ -99,6 +99,7 @@ namespace epy
             var memo = Guid.NewGuid().ToString();
             var req = new PaymentRequest()
             {
+                _id = memo,
                 token = token,
                 value = value,
                 memo = memo,
@@ -127,6 +128,9 @@ namespace epy
         public async Task<double> GetAccountBalance()
         {
             var balance = await eos.GetCurrencyBalance("eosio.token", accountName, "EOS");
+            // this account is empty!
+            if (balance.Count == 0)
+                return 0;
             return double.Parse(balance.First().Split(' ')[0]);
         }
 

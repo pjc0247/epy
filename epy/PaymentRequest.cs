@@ -9,7 +9,8 @@ namespace epy
 {
     public class PaymentRequest
     {
-        [BsonId]
+        public string _id { get; set; }
+
         public string memo { get; set; }
         public float value { get; set; }
         public string token { get; set; }
