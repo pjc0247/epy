@@ -25,7 +25,7 @@ void OnPaymentComplete(PaymentRequest p) {
 ```
 
 
-Payment Sequence
+Payment Flow
 ----
 
 ```cs
