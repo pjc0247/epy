@@ -23,6 +23,7 @@ namespace epy
         public Action<PaymentRequest> onPaymentComplete;
 
         private string endpoint;
+        private string chain;
         private string accountName;
 
         private Eos eos;
@@ -42,12 +43,15 @@ namespace epy
         private SortedList<uint, PaymentRequest> visiblePayments;
 
         public EosPay(string accountName) :
-            this("https://proxy.eosnode.tools", accountName)
+            this("https://proxy.eosnode.tools",
+                "e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473",
+                accountName)
         {
         }
-        public EosPay(string endpoint, string accountName)
+        public EosPay(string endpoint, string chain, string accountName)
         {
             this.endpoint = endpoint;
+            this.chain = chain;
             this.accountName = accountName;
             this.pendingPayments = new Dictionary<string, PaymentRequest>();
             this.visiblePayments = new SortedList<uint, PaymentRequest>();
@@ -62,7 +66,7 @@ namespace epy
             eos = new Eos(new EosConfigurator()
             {
                 HttpEndpoint = endpoint, //Mainnet
-                ChainId = "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906",
+                ChainId = chain,
                 ExpireSeconds = 60
             });
 
